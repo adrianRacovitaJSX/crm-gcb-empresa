@@ -1,0 +1,14 @@
+/* Selecciona la imagen del logo */
+.logo-image {
+  width: 100%; /* Ajusta el ancho para escritorio */
+  height: 100px; /* Ajusta la altura para escritorio */
+}
+
+/* Consulta de medios para dispositivos móviles */
+@media (max-width: 768px) {
+  .logo-image {
+    width: 150px; /* Ajusta el ancho para dispositivos móviles */
+    height: 50px; /* Ajusta la altura para dispositivos móviles */
+    display: none;
+  }
+}
