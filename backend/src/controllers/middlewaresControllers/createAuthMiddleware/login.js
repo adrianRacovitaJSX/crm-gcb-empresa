@@ -97,6 +97,7 @@ const login = async (req, res, { userModel }) => {
       domain: req.hostname,
       path: '/',
       Partitioned: true,
+      withCredentials: true,  
     })
     .json({
       success: true,
