@@ -26,7 +26,7 @@ import {
   FilterOutlined,
   WalletOutlined,
   MailOutlined,
-  ShoppingCartOutlined
+  ShoppingCartOutlined,
 } from '@ant-design/icons';
 import { FaUserPlus } from 'react-icons/fa';
 
@@ -58,7 +58,7 @@ function Sidebar({ collapsible, isMobile = false }) {
     },
     {
       key: 'informes',
-      icon:  <FaChartBar />,
+      icon: <FaChartBar />,
       label: <Link to={'/informes'}>Informes</Link>,
     },
 
@@ -208,9 +208,27 @@ function Sidebar({ collapsible, isMobile = false }) {
     >
       <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         <img src={logoText} alt="Logo" style={{ marginLeft: '', height: '58px' }} />
-
-     
       </div>
+      <div
+      style={{
+        backgroundColor: 'red',
+        borderRadius: '18px',
+        width: '50%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: '25%',
+        marginBottom: '20px',
+      }}>
+        <h3
+          style={{
+            color: 'white',
+            textAlign: 'center',
+          }}
+        >
+          Empresa
+        </h3>
+      </div>
+
       <Menu
         items={items}
         mode="inline"
