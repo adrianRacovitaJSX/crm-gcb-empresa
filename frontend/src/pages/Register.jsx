@@ -25,23 +25,9 @@ const RegisterPage = () => {
   const FormContainer = () => {
     return (
       <Loading isLoading={isLoading}>
-        <Form
-          layout="vertical"
-          name="signup"
-          className="login-form"
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-        >
-          <RegisterForm />
-          <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-form-button" size="large">
-              {translate('Register')}
-            </Button>
-            {translate('Or')} <a href="/login"> {translate('already have account Login')} </a>
-          </Form.Item>
-        </Form>
+        <h2> Registro desactivado, por favor 
+          <a href='/login'> inicia sesión.</a>
+        </h2>
       </Loading>
     );
   };
@@ -52,7 +38,7 @@ const RegisterPage = () => {
     return (
       <Result
         status="info"
-        title={translate('Verify your account')}
+        title={translate('Verifica tu cuenta')}
         subTitle="Registrado con éxito, revisa tu correo para verificar tu cuenta."
         // extra={
         //   <Button

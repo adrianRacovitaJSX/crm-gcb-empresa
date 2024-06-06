@@ -1,7 +1,7 @@
 import { Tag, Divider, Row, Col, Spin, Tooltip } from 'antd';
 import {useMoney} from "@/settings";
 
-export default function AnalyticSummaryCard({
+export default function PaymentSummaryCard({
   title,
   tagContent,
   tagColor,

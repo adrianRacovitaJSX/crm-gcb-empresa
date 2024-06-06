@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button, Drawer, Layout, Menu } from 'antd';
-
+import { FaChartBar } from 'react-icons/fa';
 import { useAppContext } from '@/context/appContext';
 
 import useLanguage from '@/locale/useLanguage';
@@ -56,6 +56,12 @@ function Sidebar({ collapsible, isMobile = false }) {
       icon: <DashboardOutlined />,
       label: <Link to={'/'}>{translate('dashboard')}</Link>,
     },
+    {
+      key: 'informes',
+      icon:  <FaChartBar />,
+      label: <Link to={'/informes'}>Informes</Link>,
+    },
+
     {
       key: 'customer',
       icon: <CustomerServiceOutlined />,

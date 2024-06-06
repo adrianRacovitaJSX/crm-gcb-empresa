@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 
 const Logout = lazy(() => import('@/pages/Logout.jsx'));
 const NotFound = lazy(() => import('@/pages/NotFound.jsx'));
-
+const Informes = lazy(() => import('@/pages/Informes'));
 const Dashboard = lazy(() => import('@/pages/Dashboard'));
 const Customer = lazy(() => import('@/pages/Customer'));
 const Inventory = lazy(() => import('@/pages/Inventory'));
@@ -54,6 +54,10 @@ export default function AppRouter() {
     {
       path: '/login',
       element: <Navigate to="/" />,
+    },
+    {
+      path: '/informes',
+      element: <Informes />,
     },
     {
       path: '/verify/*',

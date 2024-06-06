@@ -9,9 +9,11 @@ import { tagColor } from '@/utils/statusTagColor';
 
 import RecentTable from './components/RecentTable';
 
-import SummaryCard from './components/SummaryCard';
+import SummaryCard from './components/SummaryCardInvoice';
 import PreviewCard from './components/PreviewCard';
 import CustomerPreviewCard from './components/CustomerPreviewCard';
+import QuoteSummary from './components/SummaryCardQuote';
+import PaymentSummaryCard from './components/SummaryCard';
 
 export default function DashboardModule() {
   const translate = useLanguage();
@@ -98,7 +100,35 @@ export default function DashboardModule() {
   const cards = entityData.map((data, index) => {
     const { result, entity, isLoading } = data;
 
+    if ( entity === 'payment' ) {
+      return (
+        <PaymentSummaryCard 
+        key={index}
+        title={translate(data?.entity)}
+        tagColor={'green'}
+        prefix={translate('This month')}
+        isLoading={isLoading}
+        tagContent={moneyFormatter({ amount: result?.total })}
+        />
+      )
+    }
+
     if (entity === 'offer') return null;
+
+    if (entity === 'quote') {
+      return (
+        <QuoteSummary
+          key={index}
+          title={data?.entity === 'payment' ? translate('Payment') : translate(data?.entity)}
+          tagColor={
+            data?.entity === 'quote' ? 'purple' : undefined
+          }
+          prefix={translate('This month')}
+          isLoading={isLoading}
+          tagContent={moneyFormatter({ amount: result?.total })}
+        />
+      );
+    }
 
     return (
       <SummaryCard
@@ -141,7 +171,7 @@ export default function DashboardModule() {
     <>
       <Row gutter={[32, 32]}>
         {cards}
-        <SummaryCard
+        <PaymentSummaryCard
           title="Facturas pendientes"
           tagColor={'red'}
           prefix={translate('Not Paid')}
@@ -153,8 +183,12 @@ export default function DashboardModule() {
       <Row gutter={[32, 32]}>
         <Col className="gutter-row w-full" sm={{ span: 24 }} md={{ span: 24 }} lg={{ span: 18 }}>
           <div className="whiteBox shadow" style={{ height: 458 }}>
-          <Row className="pad20" gutter={[0, 0]} style={{ width: '100%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}>
-            {statisticCards}            
+            <Row
+              className="pad20"
+              gutter={[0, 0]}
+              style={{ width: '100%', display: 'flex', flexDirection: 'row', flexWrap: 'nowrap' }}
+            >
+              {statisticCards}
             </Row>
           </div>
         </Col>
@@ -187,7 +221,6 @@ export default function DashboardModule() {
           </div>
         </Col>
       </Row>
-
     </>
   );
 }
