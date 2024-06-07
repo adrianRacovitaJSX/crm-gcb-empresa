@@ -113,10 +113,24 @@ function LeadsWeb() {
   );
 
   return (
-    <div className="bg-white p-10 overflow-hidden rounded-3xl">
-      <div className="flex items-center justify-between mb-4">
+    <div style={{ 
+      background: 'white',
+      padding: '2.5rem',
+      overflow: 'hidden',
+      borderRadius: '1.5rem',
+     }}>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '1rem',
+      
+      }}>
         <Title level={2}>Leads de la Web</Title>
-        <div className="flex items-center">
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}>
           <Button type="primary" href="https://elgatoconbolsas.es/wp-admin" style={{ marginRight: '0.5rem' }}>
             Administrar web
           </Button>

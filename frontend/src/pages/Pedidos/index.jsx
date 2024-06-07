@@ -110,10 +110,29 @@ const Pedidos = () => {
   };
 
   return (
-    <div className="bg-white p-10 overflow-hidden rounded-3xl">
-      <div className="flex justify-between items-center mb-4">
+    <div
+      style={{
+        background: 'white',
+        padding: '2.5rem',
+        overflow: 'hidden',
+        borderRadius: '1.5rem',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '1rem',
+        }}
+      >
         <Title level={2}>Pedidos de la Web</Title>
-        <div className="flex items-center">
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
           <Button
             type="primary"
             href="https://elgatoconbolsas.es/wp-admin"
@@ -121,7 +140,12 @@ const Pedidos = () => {
           >
             Administrar web
           </Button>
-          <div className="flex-1">
+          <div
+            className="flex-1"
+            style={{
+              flex: '1',
+            }}
+          >
             <Search
               placeholder="Buscar por cliente"
               onChange={(e) => setSearchQuery(e.target.value)}
