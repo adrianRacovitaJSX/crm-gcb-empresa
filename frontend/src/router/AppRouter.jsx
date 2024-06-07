@@ -38,7 +38,7 @@ const Offer = lazy(() => import('@/pages/Offer/index'));
 const OfferCreate = lazy(() => import('@/pages/Offer/OfferCreate'));
 const OfferRead = lazy(() => import('@/pages/Offer/OfferRead'));
 const OfferUpdate = lazy(() => import('@/pages/Offer/OfferUpdate'));
-
+const CrearAlbaran = lazy(() => import('@/pages/CreateQuote'));
 const ExpenseCategory = lazy(() => import('@/pages/ExpenseCategory'));
 const Expense = lazy(() => import('@/pages/Expense'));
 const ProductCategory = lazy(() => import('@/pages/ProductCategory'));
@@ -46,6 +46,7 @@ const Product = lazy(() => import('@/pages/Product'));
 const Pedidos = lazy(() => import('@/pages/Pedidos'));
 const People = lazy(() => import('@/pages/People'));
 const Company = lazy(() => import('@/pages/Company'));
+const CrearFactura = lazy(() => import('@/pages/CreateInvoice'));
 
 const About = lazy(() => import('@/pages/About'));
 
@@ -54,6 +55,14 @@ export default function AppRouter() {
     {
       path: '/login',
       element: <Navigate to="/" />,
+    },
+    {
+      path: '/crear-factura',
+      element: <CrearFactura />,
+    },
+    {
+      path: '/crear-albaran',
+      element: <CrearAlbaran />,
     },
     {
       path: '/informes',
@@ -147,6 +156,7 @@ export default function AppRouter() {
       path: '/quote',
       element: <Quote />,
     },
+
     {
       path: '/quote/create',
       element: <QuoteCreate />,

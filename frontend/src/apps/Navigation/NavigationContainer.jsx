@@ -186,60 +186,65 @@ function Sidebar({ collapsible, isMobile = false }) {
   };
 
   return (
-    <Sider
-      collapsible={collapsible}
-      collapsed={collapsible ? isNavMenuClose : collapsible}
-      onCollapse={onCollapse}
-      className="navigation"
-      style={{
-        overflow: 'auto',
-        height: '100vh',
-        position: 'fixed',
-        bottom: '20px',
-        ...(!isMobile && {
-          background: 'none',
-          border: 'none',
-          left: '20px',
-          top: '20px',
-          borderRadius: '8px',
-        }),
-      }}
-      theme={'light'}
-    >
-      <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
-        <img src={logoText} alt="Logo" style={{ marginLeft: '', height: '58px' }} />
-      </div>
-      <div
-      style={{
-        backgroundColor: 'red',
-        borderRadius: '18px',
-        width: '50%',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: '25%',
-        marginBottom: '20px',
-      }}>
-        <h3
-          style={{
-            color: 'white',
-            textAlign: 'center',
-          }}
-        >
-          Empresa
-        </h3>
-      </div>
-
-      <Menu
-        items={items}
-        mode="inline"
-        theme={'light'}
-        selectedKeys={[currentPath]}
+    <>
+      <Sider
+        collapsible={collapsible}
+        collapsed={collapsible ? isNavMenuClose : collapsible}
+        onCollapse={onCollapse}
+        className="navigation"
         style={{
-          background: 'none',
-          border: 'none',
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          bottom: '20px',
+          ...(!isMobile && {
+            background: 'none',
+            border: 'none',
+            left: '20px',
+            top: '20px',
+            borderRadius: '8px',
+          }),
         }}
-      />
-    </Sider>
+        theme={'light'}
+      >
+        <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+          <img src={logoText} alt="Logo" style={{ marginLeft: '', height: '58px' }} />
+        </div>
+        <div className="bg-[#ff0000] h-auto rounded-2xl mb-5 w-[45%] items-center justify-center ml-[25%]"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginLeft: '25%',
+          width: '45%',
+          height: 'auto',
+          borderRadius: '2rem',
+          background: '#ff0000',
+          marginBottom: '15px',
+
+        
+        }}>
+          <h3 className="mt-5 text-white font-bold text-md text-center p-1" style={{
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: '15px',
+            marginTop: '5px',
+            textAlign: 'center',
+          
+          }}>Empresa</h3>
+        </div>
+        <Menu
+          items={items}
+          mode="inline"
+          theme={'light'}
+          selectedKeys={[currentPath]}
+          style={{
+            background: 'none',
+            border: 'none',
+          }}
+        />
+      </Sider>
+    </>
   );
 }
 
