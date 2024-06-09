@@ -106,8 +106,20 @@ export default function CrearFactura({ subTotal: initialSubTotal = 0, current = 
 
   return (
     <div>
-      <div className="bg-white p-10 rounded-2xl">
-        <h2 className="font-bold text-2xl pb-6">Crear factura</h2>
+      <div
+        style={{
+          background: 'white',
+          padding: '40px',
+          borderRadius: '2rem',
+        }}
+      >
+        <h2
+          style={{
+            paddingBottom: '24px',
+          }}
+        >
+          Crear factura
+        </h2>
         <Form form={form} initialValues={{ items: [{}] }} onFinish={onSubmit}>
           <Row gutter={[12, 0]}>
             <Col className="gutter-row" span={9}>
