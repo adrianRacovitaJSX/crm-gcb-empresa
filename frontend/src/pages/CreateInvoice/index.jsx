@@ -32,7 +32,7 @@ export default function CrearFactura({ subTotal: initialSubTotal = 0, current = 
   const [subTotal, setSubTotal] = useState(initialSubTotal);
 
   const fetchProducts = async () => {
-    const response = await fetch('http://localhost:8888/api/product/list', {
+    const response = await fetch('https://backempresa.elgatoconbolsas.es/api/product/list', {
       credentials: 'include', // Include cookies in the request
     });
     const data = await response.json();
