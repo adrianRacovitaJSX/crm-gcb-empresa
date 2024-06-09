@@ -16,7 +16,6 @@ import { erp } from '@/redux/erp/actions';
 import { useNavigate } from 'react-router-dom';
 import { settingsAction } from '@/redux/settings/actions';
 import useFetch from '@/hooks/useFetch';
-import { data } from 'autoprefixer';
 
 export default function CrearFactura({ subTotal: initialSubTotal = 0, current = null }) {
   const translate = useLanguage();
