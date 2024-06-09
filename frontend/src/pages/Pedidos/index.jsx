@@ -115,7 +115,7 @@ const Pedidos = () => {
         background: 'white',
         padding: '2.5rem',
         overflow: 'hidden',
-        borderRadius: '1.5rem',
+        borderRadius: '1.5remce',
       }}
     >
       <div

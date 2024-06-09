@@ -15,38 +15,7 @@ import SelectAsync from '@/components/SelectAsync';
 import { erp } from '@/redux/erp/actions';
 import { useNavigate } from 'react-router-dom';
 import { settingsAction } from '@/redux/settings/actions';
-
-const hardcodedItems = [
-  { name: 'PAH', price: 21.5, desc: 'PAPEL HIGIENICO INDUSRIAL' },
-  { name: 'BFRUG', price: 30.5, desc: 'BOLSA FRUTA GRANDE' },
-  { name: 'BFRUM', price: 21.5, desc: 'BOLSA FRUTA MEDIANA' },
-  { name: 'BFRUP', price: 16.5, desc: 'BOLSA FRUTA PEQUEÑA' },
-  { name: 'BA199', price: 48.5, desc: 'BANDEJA 199 BLANCA' },
-  { name: 'CTA35', price: 1.9, desc: 'BOLSA CAMISETA 35X50' },
-  { name: 'PET1000', price: 92.5, desc: 'TARRINA PET 1000' },
-  { name: 'VA15', price: 33.0, desc: 'VACIO 15X20' },
-  { name: 'VA25', price: 7.03, desc: 'VACIO 25X35' },
-  { name: 'PA27', price: 25.0, desc: 'PAPEL 27X38 GRACIAS COMPRA' },
-  { name: 'BAS85', price: 1.5, desc: 'BOLSA BASURA 85X105' },
-  { name: 'GU', price: 4.13, desc: 'GUANTES DE NITRILO' },
-  { name: 'SERV', price: 100.76, desc: 'SERVILLETA ABSORVENTE' },
-  { name: 'LEJ', price: 7.43, desc: 'LEJIA ALIMENTARIA' },
-  { name: 'VA2030', price: 4.0, desc: 'VACIO 20X30' },
-  { name: 'BA199', price: 48.5, desc: 'BANDEJA 199 BLANCA' },
-  { name: 'F60', price: 38.0, desc: 'FILM 60X1500' },
-  { name: 'H27', price: 24.0, desc: 'LONCHEADO H27' },
-  { name: 'F45', price: 7.5, desc: 'FILM 45X300' },
-  { name: 'F90', price: 85.0, desc: 'FILM 90X1500' },
-  { name: 'BA89N', price: 30.22, desc: 'BANDEJA 89 NEGRA' },
-  { name: 'FPA45', price: 9.26, desc: 'FILM DE PALETIZAR DE 45X300' },
-  { name: 'PL23', price: 23.0, desc: 'DESCRICPCION' },
-  { name: 'PPOR', price: 160.0, desc: 'PROTECCION POREX' },
-  { name: 'BA89', price: 30.22, desc: 'BANDEJA 89 BLANCA' },
-  { name: 'BA70', price: 36.3, desc: 'BANDEJA 70 BLANCA' },
-  { name: 'PREC', price: 3.33, desc: 'PRECINTO PROTECTOR' },
-  { name: 'BA85', price: 37.44, desc: 'BANDEJA 85 BLANCA' },
-  { name: 'BA80', price: 30.0, desc: 'BANDEJA 80 BLANCA' },
-];
+import useFetch from '@/hooks/useFetch';
 
 export default function CrearAlbaran({ subTotal: initialSubTotal = 0, current = null }) {
   const translate = useLanguage();
@@ -61,8 +30,16 @@ export default function CrearAlbaran({ subTotal: initialSubTotal = 0, current = 
   const [lastNumber, setLastNumber] = useState(() => last_quote_number + 1);
   const [form] = Form.useForm();
   const [subTotal, setSubTotal] = useState(initialSubTotal);
-  const [products, setProducts] = useState([]); // State to hold fetched products
-  const [error, setError] = useState(null);
+
+  const fetchProducts = async () => {
+    const response = await fetch('http://localhost:8888/api/product/list', {
+      credentials: 'include', // Include cookies in the request
+    });
+    const data = await response.json();
+    console.log(data);
+    return data;
+  };
+  const { result: products, isLoading, isSuccess, error } = useFetch(fetchProducts);
 
   const entity = 'quote';
 
@@ -90,16 +67,17 @@ export default function CrearAlbaran({ subTotal: initialSubTotal = 0, current = 
   }, [subTotal, taxRate, recargo]);
 
   const onItemNameChange = (index, value) => {
-    const item = hardcodedItems.find((item) => item.name === value);
-    if (item) {
-      const fields = form.getFieldsValue();
-      fields.items[index].description = item.desc;
-      fields.items[index].price = item.price;
-      form.setFieldsValue(fields);
-      updateItemTotal(index);
+    if (products) {
+      const item = products.find((item) => item.name === value);
+      if (item) {
+        const fields = form.getFieldsValue();
+        fields.items[index].description = item.description;
+        fields.items[index].price = item.price;
+        form.setFieldsValue(fields);
+        updateItemTotal(index);
+      }
     }
   };
-
   const updateItemTotal = (index) => {
     const fields = form.getFieldsValue();
     const item = fields.items[index];
@@ -126,20 +104,8 @@ export default function CrearAlbaran({ subTotal: initialSubTotal = 0, current = 
 
   return (
     <div>
-      <div
-        style={{
-          background: 'white',
-          padding: '40px',
-          borderRadius: '2rem',
-        }}
-      >
-        <h2
-          style={{
-            paddingBottom: '24px',
-          }}
-        >
-          Crear albarán
-        </h2>
+      <div className="bg-white p-10 rounded-2xl">
+        <h2 className="font-bold text-2xl pb-6">Crear albarán</h2>
         <Form form={form} initialValues={{ items: [{}] }} onFinish={onSubmit}>
           <Row gutter={[12, 0]}>
             <Col className="gutter-row" span={9}>
@@ -274,14 +240,15 @@ export default function CrearAlbaran({ subTotal: initialSubTotal = 0, current = 
                         <Select
                           placeholder="Código"
                           onChange={(value) => onItemNameChange(name, value)}
-                          showSearch // Enable text search
-                          optionFilterProp="children" // Filter based on children
+                          showSearch
+                          optionFilterProp="children"
                         >
-                          {hardcodedItems.map((item) => (
-                            <Select.Option key={item.name} value={item.name}>
-                              {item.name}
-                            </Select.Option>
-                          ))}
+                          {products &&
+                            products.map((item) => (
+                              <Select.Option key={item.name} value={item.name}>
+                                {item.name}
+                              </Select.Option>
+                            ))}
                         </Select>
                       </Form.Item>
                     </Col>
