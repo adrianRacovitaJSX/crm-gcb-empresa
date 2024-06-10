@@ -7,6 +7,13 @@ const appControllers = require('@/controllers/appControllers');
 const { routesList } = require('@/models/utils');
 
 const routerApp = (entity, controller) => {
+
+
+  if (entity === 'product') {
+    router.route(`/${entity}/all`).get(hasPermission('read'), catchErrors(controller['listAll']));
+  }
+  
+
   router
     .route(`/${entity}/create`)
     .post(hasPermission('create'), catchErrors(controller['create']));

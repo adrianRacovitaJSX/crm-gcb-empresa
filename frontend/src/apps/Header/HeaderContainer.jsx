@@ -23,7 +23,9 @@ import UpgradeButton from './UpgradeButton';
 export default function HeaderContent() {
   const currentAdmin = useSelector(selectCurrentAdmin);
   const { Header } = Layout;
-
+  const goToAutonomo = () => {
+    window.open('https://crm.elgatoconbolsas.es', '_blank');
+  };
   const translate = useLanguage();
 
   const [hasPhotoprofile, setHasPhotoprofile] = useState(false);
@@ -135,7 +137,11 @@ export default function HeaderContent() {
         </Avatar>
         {/* </Badge> */}
       </Dropdown>
-      
+      <Button type="primary" onClick={goToAutonomo} style={{
+        marginTop: '0.25rem',  
+      }}>
+        CRM Autonomo
+      </Button>
       <SelectLanguage />
     </Header>
   );
