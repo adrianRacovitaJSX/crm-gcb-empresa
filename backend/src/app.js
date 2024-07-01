@@ -59,7 +59,7 @@ const app = express();
 if (process.env.NODE_ENV === 'production') {
   app.use(
   cors({
-  origin: 'https://empresa.elgatoconbolsas.es',
+  origin: 'https://empresa.elgatoconbolsas.com',
   credentials: true,
   })
   );
